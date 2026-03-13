@@ -55,4 +55,4 @@
    - For windows computers if there is an issue on setting up enviroments google the right command that will be needed sometimes they are different. 
    - If there is an error when running the .ipynb files make sure in the analysis.py that all the paths are correct 
    - Another error that may happen when running the .ipynb files is that its not outputing in the correct place so make sure that is going into outputs. 
-   - if you move any of the files around or change names make sure you update the paths
+   - if you move any of the files around or change names make sure you update the paths 
