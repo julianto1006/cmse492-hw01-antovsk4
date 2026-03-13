@@ -61,3 +61,48 @@
    I added a second plot that shows total units sold broken down by product category (hardware, software, office). This uses the same summary data that's already being generated, just visualized differently. The new chart gets saved to outputs folder as units_by_category.png when you run analysis.py.
 
    Before this change the only output plot was revenue by region. Now you can also see which product categories are moving the most units, which is a different visual on the same data (a category could have low revenue but high unit volume or vice versa), so it adds something the original plot didn't show.
+
+7. **Containerized Run**
+   - Check if docker is installed with docker --version 
+   - if installed continue below, if not go to install docker part 
+   - touch Dockerfile (copy and paste)
+   - open the dockerfile created and add:
+
+     FROM python:3.13-slim (your version)
+
+     ENV PYTHONDONTWRITEBYTECODE=1 \
+        PYTHONUNBUFFERED=1
+
+      WORKDIR /app
+
+      COPY requirements.txt .
+
+      RUN pip install -r requirements.txt
+
+      COPY . .
+
+      CMD ["python", "scripts/analysis.py"]
+
+    - docker build -t hw01-analysis .  (copy and paste)
+    - docker run --rm -v $(pwd)/outputs:/app/outputs hw01-analysis (copy and paste)
+    - output that it ran correctly: 
+      Analysis complete.
+
+      Rows in summary: 12
+
+      Summary written to: /app/outputs/summary_by_region.csv
+
+      Plot written to: /app/outputs/revenue_by_region.png
+
+      Category plot written to: /app/outputs/units_by_category.png
+
+   - INSTALL DOCKER:
+        - go to webiste and pick the right installer https://www.docker.com/products/docker-desktop/
+
+   - Windows: 
+        - Download and run the installer
+        - Accept the default options unless you have a specific reason not to
+        - If prompted about WSL2, accept the recommended settings 
+
+  - macOS:
+        - Download and run the installer, then follow the on-screen instructions
