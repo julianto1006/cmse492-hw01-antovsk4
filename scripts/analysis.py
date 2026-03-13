@@ -14,7 +14,7 @@ def resolve_project_root() -> Path:
         candidate = Path(env_root).expanduser().resolve()
         if candidate.exists():
             return candidate
-    return Path(__file__).resolve().parent
+    return Path(__file__).resolve().parent.parent
 
 
 def configure_paths(project_root: Path) -> None:
@@ -34,8 +34,8 @@ def main() -> None:
     from file_stuff import ensure_folder, save_csv
     from plot_helpers import make_revenue_plot
 
-    sales_path = project_root / "datafiles" / "sales_jan.csv"
-    customers_path = project_root / "datafiles" / "customer_lookup.csv"
+    sales_path = project_root / "datafiles" / "raw"/ "sales_jan.csv"
+    customers_path = project_root / "datafiles" / "raw" / "customer_lookup.csv"
 
     sales_df, customer_df = load_inputs(sales_path, customers_path)
     summary = build_summary_table(sales_df, customer_df)
