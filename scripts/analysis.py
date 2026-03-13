@@ -32,7 +32,7 @@ def main() -> None:
 
     from clean_data_v1 import build_summary_table, load_inputs
     from file_stuff import ensure_folder, save_csv
-    from plot_helpers import make_revenue_plot
+    from plot_helpers import make_revenue_plot, make_category_plot
 
     sales_path = project_root / "datafiles" / "raw"/ "sales_jan.csv"
     customers_path = project_root / "datafiles" / "raw" / "customer_lookup.csv"
@@ -43,14 +43,17 @@ def main() -> None:
     output_dir = ensure_folder(project_root / "outputs")
     summary_path = output_dir / "summary_by_region.csv"
     plot_path = output_dir / "revenue_by_region.png"
+    category_plot_path = output_dir / "units_by_category.png"
 
     save_csv(summary, summary_path)
     make_revenue_plot(summary, plot_path)
+    make_category_plot(summary,category_plot_path)
 
     print("Analysis complete.")
     print(f"Rows in summary: {len(summary)}")
     print(f"Summary written to: {summary_path}")
     print(f"Plot written to: {plot_path}")
+    print(f"Category plot written to: {category_plot_path}")
 
 
 if __name__ == "__main__":

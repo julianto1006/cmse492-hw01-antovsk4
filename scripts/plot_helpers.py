@@ -20,3 +20,20 @@ def make_revenue_plot(summary_df: pd.DataFrame, out_path: Path) -> None:
     fig.tight_layout()
     fig.savefig(out_path, dpi=120)
     plt.close(fig)
+
+def make_category_plot(summary_df: pd.DataFrame, out_path: Path) -> None:
+    units_by_category=(
+        summary_df.groupby("category", as_index=False)["total_units"].sum().sort_values("total_units", ascending=False)
+    )
+
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.bar(units_by_category["category"], units_by_category["total_units"], color="#5cea6f")
+    ax.set_title("Units Sold by Category")
+    ax.set_xlabel("Category")
+    ax.set_ylabel("Total Units")
+    ax.grid(axis="y", alpha=0.2)
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=120)
+    plt.close(fig)
+
+
